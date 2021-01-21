@@ -1,0 +1,23 @@
+{
+  "bundleDependencies": false,
+  "name": "node-flow-contrib-ebr-websocket",
+  "dependencies": {
+    "util": "^0.11.1",
+    "url": "^0.11.0",
+    "ws": "^6.2.1"
+  },
+  "keywords": [
+    "node-red",
+    "websocket",
+    "url",
+    "util"
+  ],
+  "author": "limengsong",
+  "node-red": {
+    "nodes": {
+      "node-flow-contrib-ebr-websocket": "node-flow-contrib-ebr-websocket.js"
+    }
+  },
+  "version": "1.0.0",
+  "description": "node-flow-contrib-ebr-websocket"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "label-printer",
+  "description": "A Node-RED node to Label Printer",
+  "keywords": [
+    "node-red",
+    "printer"
+  ],
+  "license": "Apache-2.0",
+  "node-red": {
+    "nodes": {
+      "label-printer": "label-printer.js"
+    }
+  },
+  "version": "0.1.0"
+}

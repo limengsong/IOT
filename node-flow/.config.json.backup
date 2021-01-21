@@ -1,0 +1,551 @@
+{
+ "nodes": {
+  "node-red": {
+   "name": "node-red",
+   "version": "0.20.8-git",
+   "local": false,
+   "nodes": {
+    "inject": {
+     "name": "inject",
+     "types": [
+      "inject"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/20-inject.js"
+    },
+    "catch": {
+     "name": "catch",
+     "types": [
+      "catch"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/25-catch.js"
+    },
+    "status": {
+     "name": "status",
+     "types": [
+      "status"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/25-status.js"
+    },
+    "debug": {
+     "name": "debug",
+     "types": [
+      "debug"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/58-debug.js"
+    },
+    "link": {
+     "name": "link",
+     "types": [
+      "link in",
+      "link out"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/60-link.js"
+    },
+    "exec": {
+     "name": "exec",
+     "types": [
+      "exec"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/75-exec.js"
+    },
+    "function": {
+     "name": "function",
+     "types": [
+      "function"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/80-function.js"
+    },
+    "template": {
+     "name": "template",
+     "types": [
+      "template"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/80-template.js"
+    },
+    "delay": {
+     "name": "delay",
+     "types": [
+      "delay"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/89-delay.js"
+    },
+    "trigger": {
+     "name": "trigger",
+     "types": [
+      "trigger"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/89-trigger.js"
+    },
+    "comment": {
+     "name": "comment",
+     "types": [
+      "comment"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/90-comment.js"
+    },
+    "unknown": {
+     "name": "unknown",
+     "types": [
+      "unknown"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/core/98-unknown.js"
+    },
+    "rpi-gpio": {
+     "name": "rpi-gpio",
+     "types": [
+      "rpi-gpio in",
+      "rpi-gpio out",
+      "rpi-mouse",
+      "rpi-keyboard"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/hardware/36-rpi-gpio.js"
+    },
+    "tls": {
+     "name": "tls",
+     "types": [
+      "tls-config"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/05-tls.js"
+    },
+    "httpproxy": {
+     "name": "httpproxy",
+     "types": [
+      "http proxy"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/06-httpproxy.js"
+    },
+    "mqtt": {
+     "name": "mqtt",
+     "types": [
+      "mqtt in",
+      "mqtt out",
+      "mqtt-broker"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/10-mqtt.js"
+    },
+    "httpin": {
+     "name": "httpin",
+     "types": [
+      "http in",
+      "http response"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/21-httpin.js"
+    },
+    "httprequest": {
+     "name": "httprequest",
+     "types": [
+      "http request"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/21-httprequest.js"
+    },
+    "websocket": {
+     "name": "websocket",
+     "types": [
+      "websocket in",
+      "websocket out",
+      "websocket-listener",
+      "websocket-client"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/22-websocket.js"
+    },
+    "watch": {
+     "name": "watch",
+     "types": [
+      "watch"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/23-watch.js"
+    },
+    "tcpin": {
+     "name": "tcpin",
+     "types": [
+      "tcp in",
+      "tcp out",
+      "tcp request"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/31-tcpin.js"
+    },
+    "udp": {
+     "name": "udp",
+     "types": [
+      "udp in",
+      "udp out"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/io/32-udp.js"
+    },
+    "switch": {
+     "name": "switch",
+     "types": [
+      "switch"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/10-switch.js"
+    },
+    "change": {
+     "name": "change",
+     "types": [
+      "change"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/15-change.js"
+    },
+    "range": {
+     "name": "range",
+     "types": [
+      "range"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/16-range.js"
+    },
+    "split": {
+     "name": "split",
+     "types": [
+      "split",
+      "join"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/17-split.js"
+    },
+    "sort": {
+     "name": "sort",
+     "types": [
+      "sort"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/18-sort.js"
+    },
+    "batch": {
+     "name": "batch",
+     "types": [
+      "batch"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/logic/19-batch.js"
+    },
+    "CSV": {
+     "name": "CSV",
+     "types": [
+      "csv"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/parsers/70-CSV.js"
+    },
+    "HTML": {
+     "name": "HTML",
+     "types": [
+      "html"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/parsers/70-HTML.js"
+    },
+    "JSON": {
+     "name": "JSON",
+     "types": [
+      "json"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/parsers/70-JSON.js"
+    },
+    "XML": {
+     "name": "XML",
+     "types": [
+      "xml"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/parsers/70-XML.js"
+    },
+    "YAML": {
+     "name": "YAML",
+     "types": [
+      "yaml"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/parsers/70-YAML.js"
+    },
+    "file": {
+     "name": "file",
+     "types": [
+      "file",
+      "file in"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/@node-red/nodes/core/storage/50-file.js"
+    },
+    "node-flow-contrib-ebr-websocket": {
+     "name": "node-flow-contrib-ebr-websocket",
+     "types": [
+      "ebr-websocket in",
+      "ebr-websocket out",
+      "ebr-websocket-listener",
+      "ebr-websocket-client"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-flow-contrib-ebr-websocket/node-flow-contrib-ebr-websocket.js"
+    },
+    "label-printer": {
+     "name": "label-printer",
+     "types": [
+      "label-printer"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-flow-contrib-label-printer/label-printer.js"
+    },
+    "scale": {
+     "name": "scale",
+     "types": [
+      "scale-config"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-flow-contrib-scale/scale.js"
+    },
+    "scalecfg": {
+     "name": "scalecfg",
+     "types": [
+      "device-config"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-flow-contrib-scale/scalecfg.js"
+    },
+    "node-red-contrib-rfid-read": {
+     "name": "node-red-contrib-rfid-read",
+     "types": [
+      "RFID-Read"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-red-contrib-rfid-read/node-red-contrib-rfid-read.js"
+    },
+    "node-red-contrib-rfid-switch": {
+     "name": "node-red-contrib-rfid-switch",
+     "types": [
+      "RFID-Switch"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node-flow/lib/node-red-contrib-rfid-switch/node-red-contrib-rfid-switch.js"
+    }
+   }
+  },
+  "node-red-node-email": {
+   "name": "node-red-node-email",
+   "version": "1.8.3",
+   "local": false,
+   "nodes": {
+    "email": {
+     "name": "email",
+     "types": [
+      "e-mail",
+      "e-mail in",
+      "e-mail mta"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-email",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-email/61-email.js"
+    }
+   }
+  },
+  "node-red-node-feedparser": {
+   "name": "node-red-node-feedparser",
+   "version": "0.1.16",
+   "local": false,
+   "nodes": {
+    "feedparse": {
+     "name": "feedparse",
+     "types": [
+      "feedparse"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-feedparser",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-feedparser/32-feedparse.js"
+    }
+   }
+  },
+  "node-red-node-rbe": {
+   "name": "node-red-node-rbe",
+   "version": "0.2.9",
+   "local": false,
+   "nodes": {
+    "rbe": {
+     "name": "rbe",
+     "types": [
+      "rbe"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-rbe",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-rbe/rbe.js"
+    }
+   }
+  },
+  "node-red-node-sentiment": {
+   "name": "node-red-node-sentiment",
+   "version": "0.1.6",
+   "local": false,
+   "nodes": {
+    "sentiment": {
+     "name": "sentiment",
+     "types": [
+      "sentiment"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-sentiment",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-sentiment/72-sentiment.js"
+    }
+   }
+  },
+  "node-red-node-tail": {
+   "name": "node-red-node-tail",
+   "version": "0.0.2",
+   "local": false,
+   "nodes": {
+    "tail": {
+     "name": "tail",
+     "types": [
+      "tail"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-tail",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-tail/28-tail.js"
+    }
+   }
+  },
+  "node-red-node-twitter": {
+   "name": "node-red-node-twitter",
+   "version": "1.1.7",
+   "local": false,
+   "nodes": {
+    "twitter": {
+     "name": "twitter",
+     "types": [
+      "twitter-credentials",
+      "twitter in",
+      "twitter out"
+     ],
+     "enabled": false,
+     "local": false,
+     "module": "node-red-node-twitter",
+     "file": "/home/ubuntu/MyProjects/external-device-raspi/node_modules/node-red-node-twitter/27-twitter.js"
+    }
+   }
+  }
+ },
+ "_credentialSecret": "c374641ec4b9048ec2909913f06e474cca2688b6532d75955b68e1dd3f7f2bc4",
+ "users": {
+  "_": {
+   "editor": {
+    "view": {
+     "view-grid-size": "20",
+     "view-node-status": true,
+     "view-show-tips": false,
+     "view-snap-grid": true,
+     "view-show-grid": true,
+     "view-node-show-label": true
+    }
+   },
+   "menu-menu-item-sidebar": true
+  }
+ }
+}

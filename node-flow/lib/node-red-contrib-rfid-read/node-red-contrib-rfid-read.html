@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    RED.nodes.registerType('RFID-Read',{
+        category: 'RFID',
+        color: '#ffd900',
+        defaults: {},
+        inputs:1,
+        outputs:1,
+        icon: "./icons/rfid-read.png",
+        label: function() {
+            return  "RFID-Read";
+        }
+    });
+</script>
+
+
+
+<script type="text/x-red" data-help-name="RFID-Read">
+    <p>根据设置的时间进行周期读卡</p>
+</script>

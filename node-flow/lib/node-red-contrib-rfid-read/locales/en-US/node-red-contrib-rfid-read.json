@@ -1,0 +1,15 @@
+{
+    "RFID": {
+        "status": {
+            "close": "close",
+            "connect": "connect",
+            "disconnect": "disconnect",
+            "read":"read"
+
+        },
+        "message": {
+        }
+    }
+
+
+}

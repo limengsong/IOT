@@ -1,0 +1,10 @@
+{
+    "name": "node-red-contrib-rfid-switch",
+    "version": "0.0.1",
+    "description": "A node-red-contrib-rfid-switch node for node-red",
+    "node-red": {
+        "nodes": {
+            "node-red-contrib-rfid-switch": "node-red-contrib-rfid-switch.js"
+        }
+    }
+}

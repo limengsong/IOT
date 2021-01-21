@@ -1,0 +1,18 @@
+{
+    "RFID": {
+        "status": {
+            "close": "关闭",
+            "connect": "已连接",
+            "disconnect": "未连接"
+
+        },
+        "message": {
+            "open-fail":"打开设备失败",
+            "open-success":"打开设备成功",
+            "close-fail":"关闭设备失败",
+            "close-success":"关闭设备成功"
+        }
+    }
+
+
+}

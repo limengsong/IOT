@@ -1,0 +1,10 @@
+{
+    "name": "node-red-contrib-rfid-read",
+    "version": "0.0.1",
+    "description": "A node-red-contrib-rfid-read node for node-red",
+    "node-red": {
+        "nodes": {
+            "node-red-contrib-rfid-read": "node-red-contrib-rfid-read.js"
+        }
+    }
+}

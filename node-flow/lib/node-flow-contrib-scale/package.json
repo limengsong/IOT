@@ -1,0 +1,19 @@
+{
+    "name": "node-flow-contrib-scale",
+    "version": "0.0.1",
+    "description": "node-red 进行电子称设备接入",
+    "keywords": [
+        "external-device"
+    ],
+    "license": "Apache-2.0",
+    "node-red": {
+        "nodes": {
+            "scale": "scale.js",
+            "scalecfg": "scalecfg.js"
+        }
+    },
+    "devDependencies": {
+        "net": "^1.0.2",
+        "serialport": "^9.0.4"
+    }
+}

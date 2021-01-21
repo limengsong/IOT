@@ -1,0 +1,18 @@
+{
+    "RFID": {
+        "status": {
+            "close": "close",
+            "connect": "connect",
+            "disconnect": "disconnect"
+
+        },
+        "message": {
+            "open-fail":"open-fail",
+            "open-success":"open-success",
+            "close-fail":"close-fail",
+            "close-success":"close-success"
+        }
+    }
+
+
+}

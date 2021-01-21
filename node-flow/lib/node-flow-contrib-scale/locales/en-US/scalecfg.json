@@ -1,0 +1,32 @@
+{
+    "info": {
+        "name": "配置名称"
+    },
+    "public": {
+        "brand": "品牌",
+        "type": "方式"
+    },
+    "serial": {
+        "serialport": "端口号",
+        "baudRate": "波特率",
+        "dataBits": "数据位",
+        "stopBits": "停止位",
+        "parity": "校验位"
+    },
+    "tcpip": {
+        "ip": "IP地址",
+        "port": "端口号"
+    },
+    "tip": {
+        "name":"请输入配置名称",
+        "serialport": "请选择端口号",
+        "baudRate": "请选择波特率",
+        "dataBits": "请选择数据位",
+        "stopBits": "请选择停止位",
+        "parity": "请选择校验位",
+        "ip": "请输入设备IP地址",
+        "port": "请输入设备端口号"
+
+    }
+
+}

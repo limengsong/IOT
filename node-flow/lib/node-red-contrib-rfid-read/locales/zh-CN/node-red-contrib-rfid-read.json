@@ -1,0 +1,15 @@
+{
+    "RFID": {
+        "status": {
+            "close": "关闭",
+            "connect": "已连接",
+            "disconnect": "未连接",
+            "read":"读卡"
+
+        },
+        "message": {
+        }
+    }
+
+
+}

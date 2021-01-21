@@ -1,0 +1,27 @@
+{
+    "label-printer":{
+        "info": {
+            "name": "斑马打印机"
+        },
+        "public": {
+            "name": "名称",
+            "printer":"打印机列表"
+        },        
+        "status": {
+            "connect": "打印机已连接",
+            "disconnect": "打印机脱机"
+        },
+        "message": {
+            "help":"请选择ZPL打印机",
+            "select":"请选择：",
+            "warn-offline":"脱机状态,打印任务终止，请检查打印机线缆",
+            "error-zpl":"不支持此打印机,打印任务将终止",
+            "print-success":"打印成功",
+            "print-fail":"打印失败",
+            "print-tip":"请选择支持ZPL命令的打印机,并检查打印机连接状态"
+        },
+        "tip": {
+            "name":"请输入名称"
+        }
+    }
+}

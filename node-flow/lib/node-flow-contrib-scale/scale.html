@@ -1,0 +1,72 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-12 11:28:30
+ * @LastEditTime: 2019-12-17 05:25:31
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \external-device-pi\node-flow\lib\node-red-contrib-scale\node-red-contrib-scale.html
+ -->
+<script type="text/javascript">
+    RED.nodes.registerType('scale-config', {
+        category: 'SCALE',
+        color: "BurlyWood",
+        defaults: {
+            name: {
+                value: "",
+                required: true
+            },
+            devcfg: {
+                type: "device-config",
+                required: true
+            }
+
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "./icons/scale.png",
+        align: "left",
+        label: function () {
+            return this.name||this._("info.name");
+        },
+        //在显示对话框之前立即调用
+        oneditprepare:  function () {
+
+        },
+        // 在编辑对话框正常时调用:
+        oneditsave: function () {
+
+
+        },
+        // 在取消编辑对话框时调用:
+        oneditcancel: function () {
+
+        },
+        // 在按下配置节点的编辑对话框中的删除按钮时调用:
+        oneditdelete: function () {
+
+        },
+        // 在调整编辑对话框大小时调用
+        oneditresize: function () {
+
+        }
+    });
+</script>
+
+
+<script type="text/x-red" data-template-name="scale-config">
+    <div class="form-row">
+        <!-- <label for="node-input-name" data-i18n="public.name"></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]tip.name"> -->
+        <label for="node-input-name" data-i18n="public.name">名称</label>
+        <input type="text" id="node-input-name" placeholder="请输入设备配置名称">
+    </div>
+    <div class="form-row">
+        <label for="node-input-devcfg" data-i18n="public.devcfg">配置</label>
+        <input type="text" id="node-input-devcfg" >
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="scale-config">
+    <p>电子称配置信息</p>
+</script>
