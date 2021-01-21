@@ -5,7 +5,7 @@
 ```
 npm install;
 ```
-1. 
+2. 
 ```
 cd node-flow&&npm install
 ```
