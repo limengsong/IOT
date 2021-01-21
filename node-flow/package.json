@@ -9,6 +9,9 @@
         "ref-array": "^1.2.0"
     },
     "devDependencies": {
+        "fs": "0.0.1-security",
+        "ini": "^2.0.0",
+        "modbus-serial": "^8.0.1",
         "node-gyp": "^6.1.0"
     }
 }

@@ -1,0 +1,235 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-12 11:28:30
+ * @LastEditTime: 2019-12-13 10:49:51
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \external-device-pi\node-flow\lib\node-red-contrib-scale\node-red-contrib-scale.html
+ -->
+<script type="text/javascript">
+    //显示网口/串口选项
+    function displayOptions(type) {
+        if (type === 'serial') {
+            $("#node-config-input-devtype").parent().css("display", "block");
+            $("#node-config-input-serialPort").parent().css("display", "block");
+            $("#node-config-input-baudRate").parent().css("display", "block");
+            $("#node-config-input-dataBits").parent().css("display", "block");
+            $("#node-config-input-stopBits").parent().css("display", "block");
+            $("#node-config-input-parity").parent().css("display", "block");
+            $("#node-config-input-ip").parent().css("display", "none");
+            $("#node-config-input-port").parent().css("display", "none");
+        } else if (type === 'tcpip') {
+            $("#node-config-input-devtype").parent().css("display", "block");
+            $("#node-config-input-serialPort").parent().css("display", "none");
+            $("#node-config-input-baudRate").parent().css("display", "none");
+            $("#node-config-input-dataBits").parent().css("display", "none");
+            $("#node-config-input-stopBits").parent().css("display", "none");
+            $("#node-config-input-parity").parent().css("display", "none");
+            $("#node-config-input-ip").parent().css("display", "block");
+            $("#node-config-input-port").parent().css("display", "block");
+        } else if (type === undefined) {
+            $("#node-config-input-devtype").parent().css("display", "none");
+            $("#node-config-input-serialPort").parent().css("display", "none");
+            $("#node-config-input-baudRate").parent().css("display", "none");
+            $("#node-config-input-dataBits").parent().css("display", "none");
+            $("#node-config-input-stopBits").parent().css("display", "none");
+            $("#node-config-input-parity").parent().css("display", "none");
+            $("#node-config-input-ip").parent().css("display", "none");
+            $("#node-config-input-port").parent().css("display", "none");
+        }
+
+    }
+
+    //获取com列表
+    function getCOMList() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/coms',
+                dataType: 'json',
+                type: 'GET',
+                success: (data) => {
+                    resolve(data.data)
+                },
+                error: (err) => {
+                    reject(err)
+                }
+            });
+        });
+    }
+    RED.nodes.registerType('modbus-config', {
+        category: 'config',
+        color: "BurlyWood",
+        defaults: {
+            name: {
+                value: "",
+                required: true
+            },
+            devtype: {
+                value: 'tcpip',//default setting tcpip
+                required: true
+            },
+            serialPort: {
+                value: ""
+            },
+            baudRate: {
+                value: ""
+            },
+            dataBits: {
+                value: ""
+            },
+            stopBits: {
+                value: ""
+            },
+            parity: {
+                value: ""
+            },
+            ip: {
+                value: "172.26.15.74",
+                validate: function (v) {
+                    // 验证ip的合法性
+                    let regIp =
+                        /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+                    if (regIp.test(v)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            },
+            port: {
+                value: "1701",
+                validate: function (v) {
+                    // 验证port的合法性
+                    let regPort =
+                        /^([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{4}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/;
+                    if (regPort.test(v)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+        },
+        label: function () {
+            return this.name || this._("info.name");
+        },
+        //在显示对话框之前立即调用
+        oneditprepare: async function () {
+            let node = this;
+            if ($("#node-config-input-devtype").val() !== null) {
+                displayOptions($("#node-config-input-type").val());
+            }
+
+            //绑定type-click事件
+            $("#node-config-input-devtype").change(function () {
+                let selectNode = $(this).children('option:selected').val();
+                displayOptions(selectNode);
+            });
+            // 获取串口列表
+            let comLists = await getCOMList();
+            if (comLists.length > 0) {
+                $("#node-config-input-serialPort").empty();
+                for (let v of comLists) {
+                    if(v.code===node.serialPort){
+                        $("#node-config-input-serialPort").append(
+                        `<option value=${v.code} selected="selected">${v.value}</option>`);
+                    }else{
+                        $("#node-config-input-serialPort").append(
+                        `<option value=${v.code}>${v.value}</option>`);
+                    }
+
+                }
+            }
+        },
+        // 在编辑对话框正常时调用:
+        oneditsave: function () {
+
+        },
+        // 在取消编辑对话框时调用:
+        oneditcancel: function () {
+
+        },
+        // 在按下配置节点的编辑对话框中的删除按钮时调用:
+        oneditdelete: function () {
+
+        },
+        // 在调整编辑对话框大小时调用
+        oneditresize: function () {
+
+        }
+    });
+</script>
+
+
+<script type="text/x-red" data-template-name="modbus-config">
+    <div class="form-row">
+        <label for="node-config-input-name" data-i18n="info.name">配置名称</label>
+        <input type="text" id="node-config-input-name" >
+    </div>
+    <div class=" form-row">
+        <label for="node-config-input-devtype" data-i18n="public.devtype">方式</label>
+        <select type="text" id="node-config-input-devtype" style="width:70%;">
+            <option value="serial">串口</option>
+            <option value="tcpip" selected>网口</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-serialPort" data-i18n="serial.serialPort">串口号</label>
+        <select type="text" id="node-config-input-serialPort" style="width:70%;">
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-baudRate" data-i18n="serial.baudRate">波特率</label>
+        <select type="text" id="node-config-input-baudRate" style="width:70%;">
+            <option value="300">300</option>
+            <option value="600">600</option>
+            <option value="1200">1200</option>
+            <option value="2400">2400</option>
+            <option value="4800">4800</option>
+            <option value="9600" selected>9600</option>
+            <option value="19200">19200</option>
+            <option value="38400">38400</option>
+            <option value="57600">57600</option>
+            <option value="115200">115200</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-dataBits" data-i18n="serial.dataBits">数据位</label>
+        <select type="text" id="node-config-input-dataBits" style="width:70%;">
+            <option value="8" selected>8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-stopBits" data-i18n="serial.stopBits">停止位</label>
+        <select type="text" id="node-config-input-stopBits" style="width:70%;">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-parity" data-i18n="serial.parity">校验位</label>
+        <select type="text" id="node-config-input-parity" style="width:70%;">
+            <option value="none" selected>none</option>
+            <option value="even">even</option>
+            <option value="mark">mark</option>
+            <option value="odd">odd</option>
+            <option value="space">space</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-ip" data-i18n="tcpip.ip">IP地址</label>
+        <input type="text" id="node-config-input-ip" data-i18n="[placeholder]tip.ip">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port" data-i18n="tcpip.port">端口号</label>
+        <input type="text" id="node-config-input-port" data-i18n="[placeholder]tip.port">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="modbus-config">
+    <p>modbus通信配置信息</p>
+</script>

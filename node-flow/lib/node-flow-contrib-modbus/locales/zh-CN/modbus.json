@@ -1,0 +1,38 @@
+{
+    "modbus":{
+        "info": {
+            "name": "modbus设备"
+        },
+        "public": {
+            "name": "名称",
+            "devID":"设备地址",
+            "startAddress": "起始地址",
+            "length":"请求长度",
+            "funCode":"功能码",
+            "dataType":"数据类型"
+        },        
+        "status": {
+            "connect": "打印机已连接",
+            "disconnect": "打印机脱机"
+        },
+        "message": {
+            "help":"请选择ZPL打印机",
+            "select":"请选择：",
+            "warn-offline":"脱机状态,打印任务终止，请检查打印机线缆",
+            "error-zpl":"不支持此打印机,打印任务将终止",
+            "print-success":"打印成功",
+            "print-fail":"打印失败",
+            "print-tip":"请选择支持ZPL命令的打印机,并检查打印机连接状态"
+        },
+        "tip": {
+            "name":"请输入名称",
+            "devID":"请输入设备地址",
+            "startAddress": "请输入起始地址",
+            "length":"请输入请求长度",
+            "funCode":"请选择功能码",
+            "dataType":"请选择数据类型"
+        }
+    }
+
+    
+}

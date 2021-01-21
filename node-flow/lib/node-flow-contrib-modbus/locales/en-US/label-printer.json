@@ -1,0 +1,13 @@
+{
+    "Printer": {
+        "status": {
+            "connect": "打印机已连接",
+            "disconnect": "打印机脱机"
+        },
+        "message": {
+            "help":"请选择ZPL打印机"
+        }
+    }
+
+
+}
