@@ -66,32 +66,39 @@ module.exports = function (RED) {
 	function getRealVal(config) {
 		RED.nodes.createNode(this, config);
 		var node = this;
-		let intecRlt={};
+		let intecRlt;
 		this.on('input', function (msg) {
 			let devPrams = {};
-			let obj = {};
 			node.devID = config.devID;
-			
+
 			if (config.devType) {
 				node.cfgInfo = getDevInfo(config.devType);
 				devPrams = devInit(node);
 			}
 			let devCfgId = config.devType; //devcfg-id 读取设备配置的id
-			console.log('设备通信配置加载id:',devCfgId);
+			console.log('设备通信配置加载id:', devCfgId);
 			let wsIndex = msg._session.id; //ws client 连接的id
 			if (msg.event === 'connect') {
 				if (!clientsMap.has(devCfgId)) {
 					let clientArray = [];
-					console.log('ws客户端连接：',wsIndex);
+					console.log('ws客户端连接：', wsIndex);
 					clientArray.push(wsIndex); //记录属于这个配置信息的所有客户端id
 					clientsMap.set(devCfgId, clientArray);
 					//首次的devCfgID，进行通讯
 					devRead(devPrams, result => {
 						// result 就是devOpen回调数据
-						intecRlt=result;
-						intecRlt.unit=config.unit;//加载页面端配置的单位信息
-						msg.payload = intecRlt;
+
 						node.send(msg);
+						if (result.status === 'open') {
+							node.status({
+								fill: "green",
+								shape: "ring",
+								text: `MIS3C Open_Success`
+							});
+							intecRlt = result;
+							intecRlt.unit = config.unit; //加载页面端配置的单位信息
+							msg.payload = intecRlt;
+						}
 
 					});
 				} else {
@@ -102,11 +109,16 @@ module.exports = function (RED) {
 					if (checkIdx === -1) {
 						//不存在的客户端,则添加到数组中
 						clientsMap.get(devCfgId).push(wsIndex);
-						setInterval(()=>{
-							msg.payload = intecRlt;
-							node.send(msg);
-						},1000);
-						
+
+						setInterval(() => {
+							if (intecRlt) {
+								msg.payload = intecRlt;
+								node.send(msg);
+							}
+						}, 1000);
+
+
+
 					}
 
 				}
@@ -115,32 +127,25 @@ module.exports = function (RED) {
 				if (clientsMap.has(devCfgId)) {
 					//检测断开的客户端 属于哪个设备配置信息，并进行相应的移除操作
 					let deleIdx = clientsMap.get(devCfgId).indexOf(wsIndex);
-					console.log('ws客户端断开连接：',wsIndex);
+					console.log('ws客户端断开连接：', wsIndex);
 					if (deleIdx > -1) {
 						clientsMap.get(devCfgId).splice(deleIdx, 1); //ws客户端数组移除
 						if (clientsMap.get(devCfgId).length === 0) {
 							//客户端为0时候，则关闭电子称，并清空该配置信息
 							clientsMap.delete(devCfgId);
-							console.log('加载配置个数:',clientsMap.size);
+							console.log('加载配置个数:', clientsMap.size);
+
 							//TODO: 关闭当前的devCfgId 电子称
 							devClose(devPrams, rlt => {
-								if (rlt.status === 'close') {
+								if (!rlt) {
 									node.status({
 										fill: "gray",
-										shape: "ring",
-										text: `${rlt.value}`
+										shape: "dot",
+										text: `MIS3C Close_Success`
 									});
-								} else {
-									node.status({
-										fill: "red",
-										shape: "ring",
-										text: `${rlt.value}`
-									});
-
-									msg.payload = rlt;
-									node.send(msg);
+									console.log('------设备关闭--------');
+									intecRlt = null;
 								}
-
 							});
 						}
 					}

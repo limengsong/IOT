@@ -90,9 +90,9 @@ class tcpIntec {
 
 
     }
-    intecClose() {
+    intecClose(callback) {
         this.status = 0; //设备关闭
-        this.client.close();
+        this.client.close(rlt=>callback(rlt));
     }
 
 }
@@ -150,11 +150,13 @@ function devRead(devInfo, callback) {
 
 
 //获取电子秤设备状态
-function devClose(devInfo) {
+function devClose(devInfo,callback) {
     let index = `${devInfo.mbsHost}:${devInfo.mbsPort}`;
     if (tcpIntecMap.has(index)) {
         clearInterval(tcpIntecMap.get(index).tcpTimer);
-        tcpIntecMap.get(index).intecClose();
+        tcpIntecMap.get(index).intecClose(rlt=>
+            callback(rlt)    
+        );
     }
 
 
