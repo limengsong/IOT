@@ -11,7 +11,7 @@ const fs = require('fs');
 //读取配置文件内容：返回配置文件对象
  function readIniFile() {
     return new Promise((resolve, reject) => {
-        fs.readFile('./modbusTCP_cfg.ini','utf-8',function(err,data){
+        fs.readFile('./intec_cfg.ini','utf-8',function(err,data){
             if(err){
                 reject(err);
             }

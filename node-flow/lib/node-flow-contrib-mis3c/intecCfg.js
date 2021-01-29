@@ -37,6 +37,6 @@ module.exports = function (RED) {
 		});
 	}
 
-	RED.nodes.registerType("modbus-config", MBSConfig);
+	RED.nodes.registerType("intec-config", MBSConfig);
 
 }

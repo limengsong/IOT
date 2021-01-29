@@ -1,0 +1,85 @@
+<script type="text/javascript">
+
+
+    RED.nodes.registerType('mis3c', {
+        category: 'SCALE',
+        color: '#8A8A8A',
+        defaults: {
+            name: {
+                value: "",
+                required: true
+            },
+            devID: {
+                value: "",
+                required: true
+            },
+
+            devType: {
+                type: "intec-config",
+                required: true
+            },
+            unit: {
+                value: "g",
+                required: true
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "./icons/modbus.png",
+        label: function () {
+            return this.name || this._("mis3c.info.name");
+        },
+        //在显示对话框之前立即调用
+        oneditprepare: async function () {
+            let node = this;
+
+        },
+        // 在编辑对话框正常时调用:
+        oneditsave: function () {
+
+        },
+        // 在取消编辑对话框时调用:
+        oneditcancel: function () {
+
+        },
+        // 在按下配置节点的编辑对话框中的删除按钮时调用:
+        oneditdelete: function () {
+
+        },
+        // 在调整编辑对话框大小时调用
+        oneditresize: function () {
+
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mis3c">
+    <div class="form-row">
+        <label for="node-input-name" data-i18n="public.name">名称</label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]tip.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-devType" data-i18n="modbus.public.devType">方式</label>
+        <select type="text" id="node-input-devType" style="width:70%;">
+            <option value="null">不选择</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-devID" data-i18n="public.devID">地址</label>
+        <input type="text" id="node-input-devID" data-i18n="[placeholder]tip.devID">
+    </div>
+    <div class="form-row">
+        <label for="node-input-unit" data-i18n="modbus.public.unit">单位</label>
+        <select type="text" id="node-input-unit" style="width:70%;">
+            <option value="g" selected>g</option>
+            <option value="kg">kg</option>
+            <option value="mg">mg</option>
+        </select>
+    </div>
+
+
+   
+</script>
+<script type="text/x-red" data-help-name="mis3c">
+    <p>MIS3C茵泰克电子秤</p>
+</script>

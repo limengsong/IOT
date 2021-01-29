@@ -11,61 +11,53 @@
 
 //==============================================================
 // create an empty modbus client
-var ModbusRTU = require("modbus-serial");
-var mbsini = require("./ini.js")
-var client = new ModbusRTU();
+let ModbusRTU = require("modbus-serial");
+let mbsini = require("./ini.js")
+let client = new ModbusRTU();
 
-var mbsStatus = "Initializing..."; // holds a status of Modbus
+let mbsStatus = "Initializing..."; // holds a status of Modbus
 
 // Modbus 'state' constants
-var MBS_STATE_INIT = "State init";
-var MBS_STATE_IDLE = "State idle";
-var MBS_STATE_NEXT = "State next";
-var MBS_STATE_GOOD_READ = "State good (read)";
-var MBS_STATE_FAIL_READ = "State fail (read)";
-var MBS_STATE_GOOD_CONNECT = "State good (port)";
-var MBS_STATE_FAIL_CONNECT = "State fail (port)";
+let MBS_STATE_INIT = "State init";
+let MBS_STATE_IDLE = "State idle";
+let MBS_STATE_NEXT = "State next";
+let MBS_STATE_GOOD_READ = "State good (read)";
+let MBS_STATE_FAIL_READ = "State fail (read)";
+let MBS_STATE_GOOD_CONNECT = "State good (port)";
+let MBS_STATE_FAIL_CONNECT = "State fail (port)";
 
 // Modbus TCP configuration values
-//初始化时候，读取配置文件进行填充
-var mbsId ;//deviceID
-var mbsPort ;
-var mbsHost ;
-var mbsScan ; //轮询周期
-var mbsTimeout ; //设置超时时间
+//初始化设备信息，
+let intecObj = {
+    mbsId: '', //deviceID
+    mbsPort: '',
+    mbsHost: '',
+    mbsScan: 1000,
+    mbsTimeout: 1000,
+    fc: 3, //TODO:intec  写死功能码 
+    address: 0, //TODO:intec  帧起始地址 
+    length: 2 //TODO:intec  请求的寄存器个数（一个寄存器为16位）
+};
 
-// var mbsId = 1;//deviceID
-// var mbsPort = 502;
-// var mbsHost = "172.26.15.115";
-// var mbsScan = 500; //轮询周期
-// var mbsTimeout = 5000; //设置超时时间
-var mbsState = MBS_STATE_INIT;
-
-
+let mbsState = MBS_STATE_INIT;
 // Modbus TCP 地址列表
-var requestList=[];//里面存储对象{};key-功能码,value-地址列表
-
-
+let requestList = []; //里面存储对象{};key-功能码,value-地址列表
 //==============================================================
-var connectClient = async function () {
+let connectClient = async function () {
     // close port (NOTE: important in order not to create multiple connections)
-    //client.close();   
-    requestList=await devInit();
-    // console.log('requestList',requestList);
-    // console.log('mbsId',mbsId,'mbsPort',mbsPort,'mbsHost',mbsHost,'mbsScan',mbsScan,'mbsTimeout',mbsTimeout);
-    // set requests parameters
-    client.setID(mbsId);
+    //client.close();
+    client.setID(intecObj.mbsId);
 
-    client.setTimeout(mbsTimeout);
+    client.setTimeout(intecObj.mbsTimeout);
 
     // try to connect
-    client.connectTCP(mbsHost, {
-            port: mbsPort
+    client.connectTCP(intecObj.mbsHost, {
+            port: intecObj.mbsPort
         })
         .then(function () {
             mbsState = MBS_STATE_GOOD_CONNECT;
             mbsStatus = "Connected, wait for reading...";
-            console.log(mbsStatus);
+            //console.log(mbsStatus);
         })
         .catch(function (e) {
             mbsState = MBS_STATE_FAIL_CONNECT;
@@ -77,21 +69,23 @@ var connectClient = async function () {
 
 
 //==============================================================
-var readModbusData =  function () { 
+let readModbusData = function () {
     //解析requestList，进行设备读取
-    if(requestList.length>0){
-        for(let v of requestList){
-            let fc=parseInt(v.fc);
-            let address=parseInt(v.address);
-            let length=parseInt(v.length);
-            readDataByCfg(fc,address,length);
-        }
+    // if(requestList.length>0){
+    //     for(let v of requestList){
+    //         let fc=parseInt(v.fc);
+    //         let address=parseInt(v.address);
+    //         let length=parseInt(v.length);
+    //         readDataByCfg(fc,address,length);
+    //     }
 
-    }
+    // }
+    //TODO：茵泰克方式写死
+    readDataByCfg(intecObj.fc, intecObj.address, intecObj.length);
 };
 
 
-function readDataByCfg(fc,address,length){
+function readDataByCfg(fc, address, length) {
     switch (fc) {
         case 1:
             readCoils(address, length);
@@ -117,7 +111,11 @@ function readCoils(address, length) {
         .then(function (data) {
             mbsState = MBS_STATE_GOOD_READ;
             mbsStatus = "success";
-            console.log(data.buffer.readInt16BE(0));
+            console.log('data.data', data.data);
+            for (let i = 0; i < length; i++) {
+                let curAddress = parseInt(address + i + 1);
+                console.log('readCoils==>', '当前地址', curAddress, 'data', Number(data.data[i]));
+            }
         })
         .catch(function (e) {
             mbsState = MBS_STATE_FAIL_READ;
@@ -150,12 +148,17 @@ function readHoldingRegisters(address, length) {
         .then(function (data) {
             mbsState = MBS_STATE_GOOD_READ;
             mbsStatus = "success";
-            let alldata=data.buffer;
-            for(let i=0;i<length;i++){
-                let value=alldata.slice(2*i, 2*(i+1));
-                console.log('value',value);
-                let curAddress=parseInt(address+i+1);
-                console.log('HoldingRegisters','当前地址',curAddress,'当前数据',value.readInt16BE(0));
+            // console.log('value==》',data.data);
+            // console.log('请求的原始数据 ==》:',data.buffer,'len:',data.buffer.length);
+            let alldata = data.buffer;
+            //alldata = Buffer.from(alldata, 'utf8'); // 原始数据
+            for (let i = 0; i < length; i++) {
+                if (4 * (i + 1) > data.buffer.length) return;
+                let value = alldata.slice(4 * i, 4 * (i + 1));
+                value = value.swap32();
+                value = value.swap16();
+                //console.log('value：', value.readFloatBE(0));
+                return value.readFloatBE(0);
             }
 
         })
@@ -183,21 +186,29 @@ function readInputRegisters(address, length) {
 
 }
 
+function buildIntec(devPrams) {
+    intecObj.mbsId = devPrams.mbsId;
+    intecObj.mbsPort = devPrams.mbsPort;
+    intecObj.mbsHost = devPrams.mbsHost;
+}
 //==============================================================
-var runModbus = async function () {
-    var nextAction;
-    console.log('当前状态位：', mbsState);
+let runModbus = async function (devPrams) {
+    let nextAction;
+    //console.log('当前状态位：', mbsState);
+    if (intecObj.mbsId === '') {
+        buildIntec(devPrams); //构建设备信息
+    }
     switch (mbsState) {
         case MBS_STATE_INIT:
             nextAction = connectClient;
             break;
 
         case MBS_STATE_NEXT:
-            nextAction = readModbusData;
+            nextAction = readModbusData(devPrams);
             break;
 
         case MBS_STATE_GOOD_CONNECT:
-            nextAction = readModbusData;
+            nextAction = readModbusData(devPrams);
             break;
 
         case MBS_STATE_FAIL_CONNECT:
@@ -205,7 +216,7 @@ var runModbus = async function () {
             break;
 
         case MBS_STATE_GOOD_READ:
-            nextAction = readModbusData;
+            nextAction = readModbusData(devPrams);
             break;
 
         case MBS_STATE_FAIL_READ:
@@ -229,50 +240,18 @@ var runModbus = async function () {
     }
 
     // set for next run
-    setTimeout(runModbus, mbsScan);
+    //setTimeout(runModbus, mbsScan);
 };
 
 //==============================================================
 
-runModbus();
+//setInterval(()=>runModbus(),2000);
+
+// runModbus();
 
 
-//初始化：读取配置文件+组态信息
-async function devInit() {
-    try {
-        let devInfo = await mbsini.readIniFile();
-        let requestCnt;
-        if (devInfo.CONFIG) {
-            mbsId = parseInt(devInfo.CONFIG.Id);
-            mbsPort = parseInt(devInfo.CONFIG.Port);
-            mbsHost = devInfo.CONFIG.Ip;
-            mbsScan = parseInt(devInfo.CONFIG.Scan);
-            mbsTimeout =parseInt(devInfo.CONFIG.Timeout);
-            requestCnt = parseInt(devInfo.CONFIG.RequestCount);
 
-        } else {
-            console.log('ini配置文件有误');
-            return -1;
-        }
-        
-        if (requestCnt>0) {
-            for(let i=0;i<requestCnt;i++){
-                if(devInfo[`REQUEST${i+1}`]){
-                    let tmp={};
-                    tmp.fc=devInfo[`REQUEST${i+1}`].Function;
-                    tmp.address=devInfo[`REQUEST${i+1}`].StartingAddress;
-                    tmp.length=devInfo[`REQUEST${i+1}`].PointCount;
-                    requestList[i]=tmp;
-                }  
-            }
-        } else {
-            return -1;
-        }
-
-     return requestList;
-    } catch (err) {
-        console.log('err', err);
-    }
-
-}
-
+//接口导出：
+module.exports.intecRead = runModbus; //读取mbs数据
+//module.exports.intecInit = connectClient; //设备参数初始化连接
+// module.exports.intecRead = runModbus; //读取mbs数据

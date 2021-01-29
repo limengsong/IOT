@@ -379,26 +379,25 @@
                 "module": "node-red",
                 "file": "/Users/lms/文档/IOT_LMS/IOT/node-flow/lib/node-flow-contrib-label-printer/label-printer.js"
             },
-            "modbus": {
-                "name": "modbus",
+            "mis3c": {
+                "name": "mis3c",
                 "types": [
-                    "modbus"
+                    "mis3c"
                 ],
                 "enabled": true,
                 "local": false,
                 "module": "node-red",
-                "file": "/Users/lms/文档/IOT_LMS/IOT/node-flow/lib/node-flow-contrib-modbus/modbus.js"
+                "file": "/Users/lms/文档/IOT_LMS/IOT/node-flow/lib/node-flow-contrib-mis3c/mis3c.js"
             },
             "modbusCfg": {
                 "name": "modbusCfg",
                 "types": [
-                    "modbus-config",
-                    "device-config"
+                    "modbus-config"
                 ],
                 "enabled": true,
                 "local": false,
                 "module": "node-red",
-                "file": "/Users/lms/文档/IOT_LMS/IOT/node-flow/lib/node-flow-contrib-modbus/modbusCfg.js"
+                "file": "/Users/lms/文档/IOT_LMS/IOT/node-flow/lib/node-flow-contrib-mis3c/modbusCfg.js"
             },
             "scale": {
                 "name": "scale",
